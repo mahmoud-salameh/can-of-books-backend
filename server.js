@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express()
-
 const mongoose = require('mongoose');
-const cors = require('cors');
-const getBooks = require('./controller/book.controller');
 require('dotenv').config();
+const getBooks = require('./controller/book.controller');
+const cors = require('cors');
+
 
 const seedUserData = require('./models/user.model')
 const PORT = process.env.PORT;
