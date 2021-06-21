@@ -17,14 +17,17 @@ const seedUserData = () => {
         books: [
             { name: 'The lord of the rings' },
             { name: 'Hamlet' },
-            { name: ' The Great Gatsby' }
+            { name: 'The Great Gatsby' }
         ]
     });
-
     console.log(newUser);
+    try {
+        newUser.save();
+    } catch (error) {
+        console.log(error);
 
-    newUser.save();
+    }
 
 }
-
+seedUserData();
 module.exports = userModel;

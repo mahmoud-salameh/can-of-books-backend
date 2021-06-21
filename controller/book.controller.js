@@ -1,7 +1,9 @@
 'use strict';
 
+const {response} = require ('express')
+
 const userModel = require('../models/user.model');
-require('dotenv').config();
+// require('dotenv').config();
 
 // const createCat = (request, response) => {
 //     // const { catName, userEmail } = request;
@@ -10,7 +12,7 @@ require('dotenv').config();
 
 const getBooks = (request, response) => {
 
-    const email  = request.query;
+    const{ email } = request.query;
 
     userModel.find({ email: email }, (error, user) => {
         if (error) {
