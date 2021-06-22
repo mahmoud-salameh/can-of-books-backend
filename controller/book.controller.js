@@ -1,6 +1,6 @@
 'use strict';
 
-const {response} = require ('express')
+const {response, request} = require ('express')
 
 const userModel = require('../models/user.model');
 // require('dotenv').config();
@@ -14,7 +14,7 @@ const getBooks = (request, response) => {
 
     const{ email } = request.query;
 
-    userModel.find({ email: email }, (error, user) => {
+    userModel.findOne({ email: email }, (error, user) => {
         if (error) {
             response.send(error)
         } else {
@@ -23,4 +23,59 @@ const getBooks = (request, response) => {
     });
 }
 
-module.exports = getBooks;
+const createbook = (request, response) => {
+    
+
+    const {userEmail, bookName} = request.body;
+
+    userModel.findOne({email: userEmail}), (error, userData) => {
+
+        if (error) {
+            response.send(error)
+        }
+        else{
+            userData.books.push({ name: bookName })
+            userData.save();
+            response.json(userData);
+        }
+    }
+}
+
+const updateBook = (request, response) => {
+    const bookIndex = request.params.book_inx;
+    const { userEmail, bookIndex } = request.body
+
+        userModel.findOne({email:userEmail}, (error, userData) =>{
+        if(error){
+            response.send(error)
+        }else{
+            userData.book.splice(bookIndex, 1 , {name:bookName})
+            userData.save();
+            response.send(userData)
+        }
+    });
+}
+
+const deleteBook = (request , response) =>{
+    const bookIndex = request.params.book_inx;
+    const {email} =request.query;
+
+    userModel.findOne({ email: email} , (error, userData) => {
+        if (error) {
+            response.send(error)
+        }
+        else {
+            userData.book.splice(bookIndex, 1)
+            userData.save();
+            response.send(userData)
+        }
+    })
+
+}
+
+module.exports = {
+    getBooks,
+    createbook,
+    updateBook,
+    deleteBook
+};
