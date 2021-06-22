@@ -13,7 +13,7 @@ const userModel = mongoose.model('users', userSchema);
 
 const seedUserData = () => {
     const newUser = new userModel({
-        email: 'mahmoud4561@hotmail.com',
+        email: 'mahmoud456a@gmail.com',
         books: [
             { 
                 name: 'In Search of Lost Time',
@@ -33,13 +33,8 @@ const seedUserData = () => {
         ]
     });
     console.log(newUser);
-    try {
-        newUser.save();
-    } catch (error) {
-        console.log(error);
-
-    }
-
+    
+    newUser.save();
 }
 
 

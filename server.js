@@ -4,23 +4,23 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const {
     getBooks,
-    createBooks,
-    updateBooks,
-    deleteBooks
+    createbook,
+    updateBook,
+    deleteBook
 } = require('./controller/book.controller');
 const cors = require('cors');
 
 
-const { seedUserData } = require('./models/user.model')
 const PORT = process.env.PORT;
 app.use(cors()) 
+const { seedUserData } = require('./models/user.model')
 app.use(express.json());
 
 mongoose.connect('mongodb://localhost:27017/myFavoritebooks',
 { useNewUrlParser: true, useUnifiedTopology: true }
 );
-seedUserData();
 
+// seedUserData();
 app.get('/',(req, res) => {
 
     res.send('Hello World') 
@@ -31,9 +31,9 @@ app.get('/books', getBooks)
 
 app.post('/book', createbook);
 
-app.put('/book/:book_idx', updatebook);
+app.put('/book/:book_idx', updateBook);
 
-app.delete('/book/:book_idx', deletebook)
+app.delete('/book/:book_idx', deleteBook)
 
 app.listen(PORT, () =>{
     console.log(`Server started on ${PORT}`);

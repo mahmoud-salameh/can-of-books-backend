@@ -1,8 +1,6 @@
 'use strict';
 
-const {response, request} = require ('express')
-
-const userModel = require('../models/user.model');
+const {userModel} = require('../models/user.model');
 // require('dotenv').config();
 
 // const createCat = (request, response) => {
@@ -18,6 +16,7 @@ const getBooks = (request, response) => {
         if (error) {
             response.send(error)
         } else {
+            console.log(user)
             response.json(user)
         }
     });
@@ -43,7 +42,7 @@ const createbook = (request, response) => {
 
 const updateBook = (request, response) => {
     const bookIndex = request.params.book_inx;
-    const { userEmail, bookIndex } = request.body
+    const { userEmail, bookName } = request.body;
 
         userModel.findOne({email:userEmail}, (error, userData) =>{
         if(error){
