@@ -20,7 +20,7 @@ mongoose.connect(`${process.env.MONGO_URL}`,
 { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
-seedUserData();
+// seedUserData();
 app.get('/',(req, res) => {
 
     res.send('Hello World') 
